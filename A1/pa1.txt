@@ -1,0 +1,25 @@
+Christophe Savard
+40017812
+01/02/2019
+Assignment 1
+
+=== Task 1 ===
+The starting and ending balance should be identical for everyone as the amount deposited is the same as the amount added for both threads.
+What is going on is that the threads are not given exclusive access to the balance of the account. This eventually results in a thread reading
+half written data from the other thread and interpreting it as the actual value, resulting in wildy off results.
+
+=== Task 2 ===
+For each account, the deposit thread is first started, then the withdrawer thread is immediately started, then the process moves on
+to the next account. Swapping the order or starting all deposit then all withdraw threads does not affect the result either, as the atomicity
+problem mentioned above is still not fixed. Starting all of one time of thread, then waiting for them to all terminate could solve this problem, but
+would get rid of the concurrency on the account level.
+
+Lifetime wise, the thread is first created by the main thread, then deposits or withdraws from it's assigned account ten million times, and once this
+is complete, shuts itself off as there is no more code to execute.
+
+=== Task 5 ===
+Instead of locking the entire method's execution, the synchronized block only locks at the critical locations where read/write operations on the object
+are performed, allowing for the rest of the code to proceed no matter if another thread is also doing the same. This allows for faster execution in theory.
+In practice, since we are using 20 threads, the improvement is minimal unless the machine were to also have 20 cores, as the same work is being performed anyway,
+and only having a sufficient amount of cores could allow for true parallelization. As shown in the timestamps, my 8c/16t machine has barely any actual improvement
+over the synchronized method.
