@@ -314,6 +314,8 @@ public class BlockManager
 
 			//Chris - Phase I signal completion, wait for other threads, then release all threads
 			s1.Signal();
+			s1.Wait();
+			releaseAllPhaseI();
 
 			try
 			{
