@@ -1,5 +1,7 @@
+package task1;
+
 /**
- * Class BlockStack
+ * Class task1.BlockStack
  * Implements character block stack and operations upon it.
  *
  * $Revision: 1.4 $
@@ -25,23 +27,42 @@ class BlockStack
 	 * Current size of the stack
 	 */
 	public int iSize = DEFAULT_SIZE;
+	public int getISize()
+	{
+		return this.iSize;
+	}
+
 
 	/**
 	 * Current top of the stack
 	 */
 	public int iTop  = 3;
+	public int getITop()
+	{
+		return this.iTop;
+	}
+
+	private int accessCounter;
+	public int getAccessCounter()
+	{
+		return this.accessCounter;
+	}
+
+	public boolean isEmpty()
+	{
+		return this.iTop == -1;
+	}
+
 
 	/**
 	 * stack[0:5] with four defined values
 	 */
-	public char acStack[] = new char[] {'a', 'b', 'c', 'd', '$', '$'};
+	public char[] acStack = new char[] { 'a', 'b', 'c', 'd', '$', '$' };
 
 	/**
 	 * Default constructor
 	 */
-	public BlockStack()
-	{
-	}
+	public BlockStack() { }
 
 	/**
 	 * Supplied size
@@ -49,8 +70,7 @@ class BlockStack
 	public BlockStack(final int piSize)
 	{
 
-
-                if(piSize != DEFAULT_SIZE)
+		if(piSize != DEFAULT_SIZE)
 		{
 			this.acStack = new char[piSize];
 
@@ -62,7 +82,7 @@ class BlockStack
 			this.acStack[piSize - 2] = this.acStack[piSize - 1] = '$';
 
 			this.iTop = piSize - 3;
-                        this.iSize = piSize;
+            this.iSize = piSize;
 		}
 	}
 
@@ -72,6 +92,7 @@ class BlockStack
 	 */
 	public char pick()
 	{
+		this.accessCounter++;
 		return this.acStack[this.iTop];
 	}
 
@@ -81,6 +102,7 @@ class BlockStack
 	 */
 	public char getAt(final int piPosition)
 	{
+		this.accessCounter++;
 		return this.acStack[piPosition];
 	}
 
@@ -89,7 +111,9 @@ class BlockStack
 	 */
 	public void push(final char pcBlock)
 	{
+		this.accessCounter++;
 		this.acStack[++this.iTop] = pcBlock;
+		System.out.println("Successfully pushed to the stack");
 	}
 
 	/**
@@ -98,8 +122,10 @@ class BlockStack
 	 */
 	public char pop()
 	{
+		this.accessCounter++;
 		char cBlock = this.acStack[this.iTop];
 		this.acStack[this.iTop--] = '$'; // Leave prev. value undefined
+		System.out.println("Successfully popped from the stack");
 		return cBlock;
 	}
 }

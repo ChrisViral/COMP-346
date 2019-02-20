@@ -100,7 +100,7 @@ public class BaseThread extends Thread
 	}
 
 	/**
-	 * Just a make up for the PHASE I to make it somewhat tangeable.
+	 * Just a make up for the PHASE I to make it somewhat tangible.
 	 * Must be atomic as it touches siTurn and siNextTID.
 	 */
 	protected synchronized void phase1()
@@ -120,8 +120,8 @@ public class BaseThread extends Thread
 	}
 
 	/**
-	 * Just a make up for the PHASE II to make it somewhat tangeable.
-         * Must be atomic as it touches siTurn and siNextTID.
+	 * Just a make up for the PHASE II to make it somewhat tangible.
+     * Must be atomic as it touches siTurn and siNextTID.
 	 */
 	protected synchronized void phase2()
 	{
@@ -155,7 +155,7 @@ public class BaseThread extends Thread
 		if(siTurn == this.iTID)
 		{
 			// set siTurn = siTurn +/- 1;
-			if(pcIncreasingOrder == true)
+			if (pcIncreasingOrder)
 				siTurn++;
 			else
 				siTurn--;
