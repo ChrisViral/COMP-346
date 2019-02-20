@@ -1,4 +1,4 @@
-package task1;
+package task2;
 
 // Import (aka include) some stuff.
 import common.*;
@@ -311,6 +311,16 @@ public class BlockManager
 	 */
 	private static void reportException(Exception poException)
 	{
+		//Chris - Added checks to which type of exception has been caught and send correct message for custom exceptions
+		if (poException instanceof BlockStack.StackFullException)
+		{
+			System.err.println("Full Stack !!!");
+		}
+		else if (poException instanceof  BlockStack.StackEmptyException)
+		{
+			System.err.println("Empty Stack !!!");
+		}
+
 		System.err.println("Caught exception : " + poException.getClass().getName());
 		System.err.println("Message          : " + poException.getMessage());
 		System.err.println("Stack Trace      : ");
