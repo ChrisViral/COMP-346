@@ -1,4 +1,4 @@
-
+package Task5;
 /**
  * Class Account 
  * Implements one customized customer account for many of our own threads.
@@ -32,6 +32,11 @@ public class Account
 	 * Attribute that presents an account balance
 	 */
 	private double balance;
+
+	/**
+	 * Synchronizing lock
+	 */
+	private final Object lock = new Object();
 
 	/*
 	 * ------------
@@ -161,19 +166,24 @@ public class Account
 	 */
 	public void deposit(double amount)
 	{
+
 		// Waste some time doing fake computations
 		// do not remove or modify any of the following 3 statements
 		double k = 999999999;
 		for (int i = 0; i < 100; i++)
 			k = k / 2;
 
-		balance = balance + amount;
+		synchronized (this.lock)
+		{
+			balance = balance + amount;
+		}
 
 		// Waste some time doing fake computations
 		// do not remove or modify any of the following 3 statements
 		k = 999999999;
 		for (int i = 0; i < 100; i++)
 			k = k / 2;
+
 	}
 
 	/**
@@ -183,13 +193,17 @@ public class Account
 	 */
 	public void withdraw(double amount)
 	{
+
 		// Waste some time doing fake computations
 		// do not remove or modify any of the following 3 statements
 		double k = 999999999;
 		for (int i = 0; i < 100; i++)
 			k = k / 2;
 
-		balance = balance - amount;
+		synchronized (this.lock)
+		{
+			balance = balance - amount;
+		}
 
 		// Waste some time doing fake computations
 		// do not remove or modify any of the following 3 statements

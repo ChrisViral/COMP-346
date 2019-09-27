@@ -1,4 +1,4 @@
-
+package Task4;
 /**
  * Class Account 
  * Implements one customized customer account for many of our own threads.
@@ -159,8 +159,9 @@ public class Account
 	 *
 	 * @param amount A double that represents a deposit amount
 	 */
-	public void deposit(double amount)
+	public synchronized void deposit(double amount)
 	{
+
 		// Waste some time doing fake computations
 		// do not remove or modify any of the following 3 statements
 		double k = 999999999;
@@ -174,6 +175,7 @@ public class Account
 		k = 999999999;
 		for (int i = 0; i < 100; i++)
 			k = k / 2;
+
 	}
 
 	/**
@@ -181,8 +183,9 @@ public class Account
 	 *
 	 * @param amount A double that represents a withdrawal amount
 	 */
-	public void withdraw(double amount)
+	public synchronized void withdraw(double amount)
 	{
+
 		// Waste some time doing fake computations
 		// do not remove or modify any of the following 3 statements
 		double k = 999999999;
