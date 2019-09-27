@@ -161,7 +161,6 @@ public class Account
 	 */
 	public void deposit(double amount)
 	{
-
 		// Waste some time doing fake computations
 		// do not remove or modify any of the following 3 statements
 		double k = 999999999;
@@ -175,7 +174,6 @@ public class Account
 		k = 999999999;
 		for (int i = 0; i < 100; i++)
 			k = k / 2;
-
 	}
 
 	/**
@@ -185,7 +183,6 @@ public class Account
 	 */
 	public void withdraw(double amount)
 	{
-
 		// Waste some time doing fake computations
 		// do not remove or modify any of the following 3 statements
 		double k = 999999999;
