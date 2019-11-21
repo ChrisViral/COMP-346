@@ -1,0 +1,48 @@
+Main thread starts executing.
+Initial value of top = 3.
+Initial value of stack top = d.
+Main thread will now fork several threads.
+Two Consumer threads have been created.
+Two Producer threads have been created.
+One CharStackProber thread has been created.
+Consumer thread [TID=1] starts executing.
+Producer thread [TID=4] starts executing.
+Producer thread [TID=3] starts executing.
+Consumer thread [TID=2] starts executing.
+CharStackProber thread [TID=5] starts executing.
+Consumer thread [TID=1] pops character =d
+Consumer thread [TID=1] pops character =c
+Consumer thread [TID=1] pops character =b
+Consumer thread [TID=2] pops character =a
+Consumer thread [TID=1] terminates.
+CharStackEmptyException was caught in Consumer thread [TID=2]: Char Stack is empty.
+CharStackExceptions.CharStackEmptyException: Char Stack is empty.
+	at CharStack.pop(CharStack.java:137)
+	at StackManager$Consumer.run(StackManager.java:33)
+CharStackEmptyException was caught in Consumer thread [TID=2]: Char Stack is empty.
+CharStackExceptions.CharStackEmptyException: Char Stack is empty.
+	at CharStack.pop(CharStack.java:137)
+	at StackManager$Consumer.run(StackManager.java:33)
+Consumer thread [TID=2] terminates.
+CharStackEmptyException was caught in Producer thread [TID=3]: Char Stack is empty.
+CharStackExceptions.CharStackEmptyException: Char Stack is empty.
+	at CharStack.pick(CharStack.java:102)
+	at StackManager$Producer.run(StackManager.java:75)
+Producer thread [TID=3] pushes character =a
+Producer thread [TID=3] pushes character =b
+Producer thread [TID=3] pushes character =c
+Stack S = ([a],[b],[c],[$],[$],[$],[$],[$],[$],[$])
+Stack S = ([a],[b],[c],[$],[$],[$],[$],[$],[$],[$])
+Stack S = ([a],[b],[c],[$],[$],[$],[$],[$],[$],[$])
+Stack S = ([a],[b],[c],[$],[$],[$],[$],[$],[$],[$])
+Stack S = ([a],[b],[c],[$],[$],[$],[$],[$],[$],[$])
+Producer thread [TID=3] terminates.
+Stack S = ([a],[b],[c],[$],[$],[$],[$],[$],[$],[$])
+Producer thread [TID=4] pushes character =d
+Producer thread [TID=4] pushes character =e
+Producer thread [TID=4] pushes character =f
+Producer thread [TID=4] terminates.
+System terminates normally.
+Final value of top = 5.
+Final value of stack top = f.
+Final value of stack top-1 = e.

@@ -1,19 +1,19 @@
-package common;
+package common; 
 
-import java.util.Random;
+import java.util.Random;   
 
 /**
  * Class BaseThread
- * Simply one customized base class for many of our own threads.
+ * Simply one customized base class for many of our own threads   
  *
  * An attempt to maintain an automatic unique TID (thread ID)
  * among all the derivatives and allow setting your own if needed.
  * Plus some methods for the sync exercises.
  *
- * $Revision: 1.4 $
- * $Last Revision Date: 2019/02/02 $
+ * $Revision: 1.2 $
+ * $Last Revision Date: 2010/10/24 $  
  *
- * @author Serguei A. Mokhov, mokhov@cs.concordia.ca
+ * @author Serguei A. Mokhov, mokhov@cs.concordia.ca   
  */
 public class BaseThread extends Thread
 {
@@ -24,17 +24,17 @@ public class BaseThread extends Thread
 	 */
 
 	/**
-	 * Preserves value across all instances.
+	 * Preserves value across all instances
 	 */
 	public static int siNextTID = 1;
 
 	/**
-	 * Our Thread ID.
+	 * Our Thread ID
 	 */
 	protected int iTID;
 
 	/**
-	 * TID of a thread to proceed to the phase II.
+	 * TID of a thread to proceed to the phase II
 	 */
 	private static int siTurn = 1;
 
@@ -53,7 +53,7 @@ public class BaseThread extends Thread
 	}
 
 	/**
-	 * Assigns name to the thread and places it to the specified group.
+	 * Assigns name to the thread and places it to the specified group
 	 *
 	 * @param poGroup ThreadGroup to add this thread to
 	 * @param pstrName A string indicating human-readable thread's name
@@ -65,7 +65,7 @@ public class BaseThread extends Thread
 	}
 
 	/**
-	 * Sets user-specified TID.
+	 * Sets user-specified TID
 	 */
 	public BaseThread(final int piTID)
 	{
@@ -73,7 +73,7 @@ public class BaseThread extends Thread
 	}
 
 	/**
-	 * Retrieves our TID.
+	 * Retrieves our TID
 	 * @return TID, integer
 	 */
 	public final int getTID()
@@ -90,18 +90,8 @@ public class BaseThread extends Thread
 	}
 
 	/**
-	 * Allows setting initial turn value to something else
-	 * other than the default "1" (one).
-	 * @param piInitTurn new initial value of the turn.
-	 */
-	public static synchronized final void setInitialTurn(int piInitTurn)
-	{
-		siTurn = piInitTurn;
-	}
-
-	/**
-	 * Just a make up for the PHASE I to make it somewhat tangible.
-	 * Must be atomic as it touches siTurn and siNextTID.
+	 * Just a make up for the PHASE I to make it somewhat tangeable.
+	 * Must be atomic.
 	 */
 	protected synchronized void phase1()
 	{
@@ -120,8 +110,8 @@ public class BaseThread extends Thread
 	}
 
 	/**
-	 * Just a make up for the PHASE II to make it somewhat tangible.
-     * Must be atomic as it touches siTurn and siNextTID.
+	 * Just a make up for the PHASE II to make it somewhat tangeable.
+	 * Must be atomic.
 	 */
 	protected synchronized void phase2()
 	{
@@ -155,7 +145,7 @@ public class BaseThread extends Thread
 		if(siTurn == this.iTID)
 		{
 			// set siTurn = siTurn +/- 1;
-			if (pcIncreasingOrder)
+			if(pcIncreasingOrder == true)
 				siTurn++;
 			else
 				siTurn--;
@@ -167,13 +157,51 @@ public class BaseThread extends Thread
 	}
 
 	/**
-	 * Always assumes the increasing order.
+	 * Always assumes the increasing order
 	 */
 	public synchronized boolean turnTestAndSet()
 	{
 		return turnTestAndSet(true);
 	}
 
+	/**
+	 * Allows setting arbitratu turn value. Should be set only before
+	 * the threads are started
+	 */
+	public static void setInitialTurn(int piTurn)
+	{
+		siTurn = piTurn;
+	}
+
+	/**
+	 * Default ascending order
+	 */
+	public static void setInitialTurnAscending()
+	{
+		setInitialTurn(1);
+	}
+
+	/**
+	 * Descending order
+	 */
+	public static void setInitialTurnDescending()
+	{
+		setInitialTurn(siNextTID - 1);
+	}
+
+	/**
+	 * Calls yield() several (4-40, pseudorandomly) times.
+	 * Next to useless, but helps to mix up the execution of phases.
+	 * Must NOT be atomic.
+	 */
+	public void randomYield()
+	{
+		// Generate from 5 to 40 yield()'s pseudorandomly
+		int iNumYields = (int)((new Random()).nextFloat() * 35) + 5;
+
+		for(int i = 0; i < iNumYields; i++)
+			yield();
+	}
 }
 
 // EOF

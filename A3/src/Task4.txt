@@ -1,0 +1,11 @@
+To solve starvation while eating, I simply prioritized which chopstick the philosopher tries to take.
+Since the philosopher i attempts to get chopsticks i and (i+1)%n, this means that the last philosopher
+tries to take chopsticks i and 0. If all philosophers try to take the lowest numbered chopstick they have
+access to first, they should all pick one except the last philosopher who would try to take chopstick 0
+that is already owned by the first philosopher. Then the n-1 philosopher can take chopstick n and eat.
+When he is done, this leaves only philosopher n-2 to take his chopstick and eat, and so on. Eventually,
+The first philosopher will eat, liberating chopstick 0 and allowing the last philosopher to take it.
+
+For the second problem, I simply implemented a queue (FIFO) which makes sure that the philosophers
+speak in the order they first requested to speak in. Once one philosopher is done speaking, if anyone
+else is waiting to speak, the queue will be popped and this next philosopher can proceed and talk.

@@ -13,8 +13,10 @@ hs_err_pid*
 
 # IntelliJ
 .idea/
+*.iml
 
 # Other
 *.zip
 out/
+debug.log
 
